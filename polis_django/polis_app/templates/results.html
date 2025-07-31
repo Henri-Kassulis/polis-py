@@ -1,0 +1,79 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ergebnisse: {{ topic.name }}</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+
+<a href="{% url 'topic_detail' topic.pk %}">Zurück zum Thema</a>
+
+
+<h2>Balkendiagramm</h2>
+<canvas id="resultChart" width="800" height="400"></canvas>
+
+<script>
+  const ctx = document.getElementById('resultChart').getContext('2d');
+  const chart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: [{% for r in results %}"{{ r.text|truncatechars:30 }}",{% endfor %}],
+        datasets: [
+        {
+            label: 'Zustimmung',
+            backgroundColor: 'green',
+            data: [{% for r in results %}{{ r.agree }},{% endfor %}]
+        },
+        {
+            label: 'Neutral',
+            backgroundColor: 'gray',
+            data: [{% for r in results %}{{ r.neutral }},{% endfor %}]
+        },
+        {
+            label: 'Ablehnung',
+            backgroundColor: 'red',
+            data: [{% for r in results %}{{ r.disagree }},{% endfor %}]
+        }
+        ]
+
+    },
+    options: {
+      responsive: true,
+      indexAxis: 'y',  // Horizontal
+      scales: {
+        x: {
+            stacked: true,
+            max: 100,
+            ticks: { callback: value => value + "%" }
+        },
+        y: { stacked: true }
+      }
+    }
+  });
+</script>
+
+<h1>Ergebnisse für: {{ topic.name }}</h1>
+
+<table border="1">
+  <tr>
+    <th>Statement</th>
+    <th>Zustimmung</th>
+    <th>Neutral</th>
+    <th>Ablehnung</th>
+  </tr>
+  {% for s in statements %}
+  <tr>
+    <td>{{ s.text }}</td>
+    <td>{{ s.agree_count }}</td>
+    <td>{{ s.neutral_count }}</td>
+    <td>{{ s.disagree_count }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+
+</body>
+</html>

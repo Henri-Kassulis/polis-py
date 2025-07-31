@@ -1,0 +1,4 @@
+.venv
+polis_django/node_modules/
+polis_django/db.sqlite3
+**/__pycache__/

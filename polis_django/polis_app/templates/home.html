@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Willkommen bei PolisPy</h2>
+
+  <a href="{% url 'topics' %}">Themen anzeigen</a>
+  <a href="{% url 'topic_create' %}">Thema anlegen</a>
+
+
+
+{% endblock  %}

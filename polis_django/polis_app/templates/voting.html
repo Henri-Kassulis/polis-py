@@ -1,0 +1,10 @@
+<h2>Statement zum Bewerten</h2>
+
+<p>{{ statement.text }}</p>
+
+<form method="post" action="{% url 'submit_vote' topic.pk statement.pk %}">
+  {% csrf_token %}
+  <button name="value" value="yes">👍 Ja</button>
+  <button name="value" value="neutral">😐 Neutral</button>
+  <button name="value" value="no">👎 Nein</button>
+</form>

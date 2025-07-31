@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{ topic.name }}</h1>
+<p>{{ topic.description }}</p>
+
+<div class="d-flex gap-2 mt-3">
+  <a href="{% url 'topics' %}">Zurück zur Liste</a>
+  <a href="{% url 'statement_create' topic.pk %}" class="btn btn-outline-primary">Neues Statement hinzufügen</a>
+  <a href="{% url 'bulk_statements_create' topic.pk %}" class="btn btn-outline-primary">Mehrere Statements hinzufügen</a>
+  <a href="{% url 'start_voting' topic.pk %}" class="btn btn-outline-success">Zum Voting starten</a>
+  <a href="{% url 'results' topic.pk %}" class="btn btn-outline-secondary">Ergebnisse</a>
+</div>
+
+<h2 class="mt-2">Statements</h2>
+<ul>
+  {% for s in topic.statements.all %}
+    <li>{{ s.text }}</li>
+  {% empty %}
+    <li>Noch keine Statements.</li>
+  {% endfor %}
+</ul>
+
+{% endblock  %}
+
+

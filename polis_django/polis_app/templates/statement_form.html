@@ -1,0 +1,9 @@
+<h1>Neues Statement für: {{ topic.name }}</h1>
+
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Hinzufügen</button>
+</form>
+
+<a href="{% url 'topic_detail' topic.pk %}">Zurück zum Thema</a>

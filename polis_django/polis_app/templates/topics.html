@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Themen</h2>
+    <a href="{% url 'topic_create' %}">Thema anlegen</a>
+
+    {% if topics %}
+    <ul>
+        {% for topic in topics %}
+            <li><a href="{% url 'topic_detail' topic.pk %}">
+                {{ topic.name }}
+            </a> : {{ topic.description }}</li>
+        {% endfor %}
+    </ul>
+    {% else %}
+        <p>Es sind derzeit keine Topics vorhanden.</p>
+    {% endif %}
+{% endblock  %}

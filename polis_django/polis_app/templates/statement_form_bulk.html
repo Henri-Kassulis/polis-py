@@ -1,0 +1,9 @@
+<h1>Mehrere Statements für: {{ topic.name }}</h1>
+
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Statements hinzufügen</button>
+</form>
+
+<a href="{% url 'topic_detail' topic.pk %}">Zurück zum Thema</a>

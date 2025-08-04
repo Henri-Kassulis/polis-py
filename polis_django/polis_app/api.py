@@ -83,3 +83,24 @@ class VoteAPIView(APIView):
             vote = serializer.save()
             return Response({"success": True, "vote_id": vote.id}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+
+# Vote ergebnisse anzeigen. statementID, statement, #agree, #neutral, #disagree
+class TopicVoteResultsView(APIView):
+    def get(self, request, topic_id):
+        # Alle Statements zu diesem Topic holen
+        statements = Statement.objects.filter(topic_id=topic_id)
+
+        results = []
+
+        for stmt in statements:
+            votes = Vote.objects.filter(statement=stmt)
+            results.append({
+                "statement_id": stmt.id,
+                "statement_text": stmt.text,
+                "agree": votes.filter(vote=Vote.AGREE).count(),
+                "neutral": votes.filter(vote=Vote.PASS).count(),
+                "disagree": votes.filter(vote=Vote.DISAGREE).count(),
+            })
+
+        return Response(results)

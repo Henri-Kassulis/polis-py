@@ -22,7 +22,8 @@ export default function TopicDetail() {
       <Link to={`/topics/${topic.id}/vote`} >Abstimmen</Link>
       <Link to={`/topics/${topic.id}/add-statement`} >  Aussage hinzufügen</Link>
       <Link to={`/topics/${topic.id}/statements/bulk`}>  Mehrere Aussagen hinzufügen</Link>
-
+      <Link to={`/topics/${topic.id}/results`}>  Ergebnisse</Link>
+      
       <h2>{topic.name}</h2>
       <p>{topic.description}</p>
 

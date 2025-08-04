@@ -5,6 +5,7 @@ import TopicDetail from "./TopicDetail";
 import CreateTopicForm from "./CreateTopicForm";
 import AddStatementPage from "./AddStatementPage";
 import AddStatementsBulkPage from "./AddStatementsBulkPage ";
+import ResultsPage from "./ResultsPage";
 
 // cookie for anonymous voting
 import Cookies from "js-cookie";
@@ -33,6 +34,7 @@ function App() {
         <Route path="/topics/:topicId/add-statement" element={<AddStatementPage />} />
         <Route path="/topics/:topicId/statements/bulk" element={<AddStatementsBulkPage />} />
         <Route path="/topics/:topicId/vote" element={<Vote />} />
+        <Route path="/topics/:topicId/results" element={<ResultsPage />} />
       </Routes>
     </BrowserRouter>
   );

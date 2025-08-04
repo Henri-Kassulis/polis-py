@@ -26,6 +26,7 @@ urlpatterns = [
     path('api/topics/<int:topic_id>/statements/bulk/', api.BulkCreateStatementsView.as_view(), name='bulk_create_statements'),
     path("api/votes/", api.VoteAPIView.as_view(), name="vote-api"),
     path('api/votes/<int:topic_id>/<uuid:user_uuid>/', api.RandomUnvotedStatementAPIView.as_view(), name='random-unvoted-statement'),
+    path("api/votes/<int:topic_id>/results/", api.TopicVoteResultsView.as_view()),
     # login
     path("token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
     path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
